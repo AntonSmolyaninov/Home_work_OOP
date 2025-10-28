@@ -1,7 +1,7 @@
-from unittest.mock import mock_open, patch
 import json
-from src.utils import load_categories_from_json
+from unittest.mock import mock_open, patch
 
+from src.utils import load_categories_from_json
 
 mock_json_data = """
 [
