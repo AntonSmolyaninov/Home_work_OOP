@@ -1,23 +1,23 @@
 class Category:
     name: str
     description: str
-    product: list
+    products: list
     category_count = 0
     product_count = 0
 
-
-    def __init__(self, name, description, product):
+    def __init__(self, name: str, description: str, products: list) -> None:
         self.name = name
         self.description = description
-        self.product = product if product else []
+        self.products = products
         Category.category_count += 1
-        Category.product_count += len(product) if product else 0
+        Category.product_count += len(products)
+
 
 if __name__ == "__main__":
     category = Category("Овощи", "для салата", ["помидор", "огурец", "перец"])
 
     print(category.name)
     print(category.description)
-    print(category.product)
-    print(category.category_count)
-    print(category.product_count)
+    print(category.products)
+    print(Category.category_count)
+    print(Category.product_count)
