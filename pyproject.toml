@@ -1,5 +1,5 @@
 [tool.poetry]
-name = "home_work_OOP"
+name = "homework OOP"
 version = "0.1.0"
 description = "homework on the object-oriented programming module"
 authors = ["Anton <klip07@rambler.ru>"]
