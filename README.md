@@ -36,7 +36,7 @@
 - `poetry run pytest --cov` — через poetry.
 - `pytest` - запуск всех тестов.
 - `pytest --cov=src --cov-report=html` - сгенерировать отчет о покрытии в HTML-формате, где src — пакет c модулями, которые тестируем.
-
+- `pytest --cov=src --cov-report=xml:coverage.xml` - запись отчета о покрытии в coverage.xml
 ## Тестирование:
 1. conftest.py - фикстуры для тестов.
 2. test_Category.py - тестируем класс Category
