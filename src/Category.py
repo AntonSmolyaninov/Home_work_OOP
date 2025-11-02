@@ -1,23 +1,28 @@
+from src.Product import Product
+
+
 class Category:
-    name: str
-    description: str
-    products: list
+    # Статические счетчики для всех экземпляров
     category_count = 0
     product_count = 0
 
-    def __init__(self, name: str, description: str, products: list) -> None:
+    def __init__(self, name: str, description: str, products: list = None) -> None:
         self.name = name
         self.description = description
-        self.products = products
+        self._products = products if products is not None else []
         Category.category_count += 1
-        Category.product_count += len(products)
+        Category.product_count += len(self._products)
 
+    def add_product(self, product: Product) -> None:
+        """Добавляет продукт в список товаров"""
+        self._products.append(product)
+        Category.product_count += 1
 
-if __name__ == "__main__":
-    category = Category("Овощи", "для салата", ["помидор", "огурец", "перец"])
+    @property
+    def products(self) -> str:
+        """Геттер для возвращения строкового представления всех продуктов"""
+        if not self._products:
+            return "Нет продуктов в категории"
 
-    print(category.name)
-    print(category.description)
-    print(category.products)
-    print(Category.category_count)
-    print(Category.product_count)
+        return "\n".join(
+            f'{product.name}, {product.price} руб. Остаток: {product.quantity} шт.' for product in self._products)
