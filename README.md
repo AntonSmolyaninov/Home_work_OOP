@@ -4,11 +4,17 @@
 
 ## Описание:
 1.  Есть два класса Product и Category, определенны свойства, добавлена инициализация и атрибуты.
-2`load_categories_from_json` - Загружает категории и продукты из файла JSON по указанному пути.
+2. `load_categories_from_json` - Загружает категории и продукты из файла JSON по указанному пути.
+3. 'def add_product' - добовляет продукт в список товаров.
+4. `def products` - геттер который выводит список товаров в виде строк.
+5. `def new_product` - Принемает параметры товара в словаре и возвращает созданный объект класса "Product".
+6. `def price` - Геттер для атрибута цены.
+7. `def price` - Сеттер для атрибута цены с проверкой.
+
 
 ## Установка:
 1. Клонируйте репозиторий:
-```https://github.com/AntonSmolyaninov/PythonProject/pull/2```
+```https://github.com/AntonSmolyaninov/Home_work_OOP```
 2. Установите зависимости:
 - `poetry init` — инициализировать пакет в существующем проекте.
 - `poetry new package-name` — создать новый проект.
@@ -37,6 +43,7 @@
 - `pytest` - запуск всех тестов.
 - `pytest --cov=src --cov-report=html` - сгенерировать отчет о покрытии в HTML-формате, где src — пакет c модулями, которые тестируем.
 - `pytest --cov=src --cov-report=xml:coverage.xml` - запись отчета о покрытии в coverage.xml
+
 ## Тестирование:
 1. conftest.py - фикстуры для тестов.
 2. test_Category.py - тестируем класс Category
