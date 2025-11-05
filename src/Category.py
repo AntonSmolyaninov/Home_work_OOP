@@ -1,5 +1,6 @@
 from src.Product import Product
 
+
 class Category:
     name: str
     description: str
@@ -7,7 +8,7 @@ class Category:
     category_count: int = 0  # Общее количество категорий
     product_count: int = 0  # Общее количество продуктов во всех категориях
 
-    def __init__(self, name: str, description: str, products: list[Product] = None) -> None:
+    def __init__(self, name: str, description: str, products: list[Product]):
         self.name = name
         self.description = description
         self.__products = products if products is not None else []
@@ -40,12 +41,3 @@ class Category:
         return "\n".join(
             f'{product.name}, {product.price} руб. Остаток: {product.quantity} шт.' for product in self.__products
         )
-
-    @property
-    def in_products(self):
-        return self.__products
-
-    @property
-    def products(self) -> list[Product]:  # Убедитесь, что тип указан правильно
-        """Геттер, который возвращает список продуктов"""
-        return self.__products

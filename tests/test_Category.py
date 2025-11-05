@@ -1,6 +1,7 @@
 from src.Category import Category
 from src.Product import Product
 
+
 def test_category_initialization(category):
     """Тестируем инициализацию категории"""
     assert category.name == "Смартфоны"
