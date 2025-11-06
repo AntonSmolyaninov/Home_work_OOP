@@ -2,18 +2,23 @@ from src.Product import Product
 
 
 class Category:
-    name: str
-    description: str
-    __products: list[Product]  # Приватный атрибут, содержащий продукты
-    category_count: int = 0  # Общее количество категорий
-    product_count: int = 0  # Общее количество продуктов во всех категориях
+    name: str #название
+    description: str #описание
+    __products: list[Product]  # приватный атрибут, список товаров
+    category_count: int = 0  # количество категорий
+    product_count: int = 0  #количество товаров
 
     def __init__(self, name: str, description: str, products: list[Product]):
         self.name = name
         self.description = description
-        self.__products = products if products is not None else []
+        self.__products = products if products else []
         Category.category_count += 1
         Category.product_count += len(self.__products)
+
+
+    def __str__(self):
+        return f'{self.name}, количество продуктов: {Category.product_count} шт.'
+
 
     def add_product(self, product: Product) -> None:
         """Добавляет продукт в список товаров"""
@@ -32,12 +37,12 @@ class Category:
             self.__products.append(product)
             Category.product_count += 1  # Увеличиваем глобальный счетчик
 
+
     @property
     def products(self) -> str:
         """Геттер, который выводит список товаров в виде строк"""
-        if not self.__products:
-            return "Нет продуктов в категории"
+        products_str = ""
+        for product in self.__products:
+            products_str += f"{str(product)} \n"
 
-        return "\n".join(
-            f'{product.name}, {product.price} руб. Остаток: {product.quantity} шт.' for product in self.__products
-        )
+        return products_str
