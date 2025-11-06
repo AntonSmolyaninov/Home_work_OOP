@@ -34,4 +34,3 @@ def test_add_existing_product_updates_price(category):
 
     # Цена второго продукта должна обновиться
     assert category.in_products[1].price == 250000.0  # Должна быть новая более высокая цена
-

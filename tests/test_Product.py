@@ -12,11 +12,7 @@ def test_product_creation(product1):
 
 def test_create_product_with_default_quantity():
     """Тестируем создание продукта с использованием значения по умолчанию для quantity"""
-    product_info = {
-        'name': "iPhone 14",
-        'description': "256GB, красный",
-        'price': 80000.0
-    }
+    product_info = {"name": "iPhone 14", "description": "256GB, красный", "price": 80000.0}
 
     product = Product.new_product(product_info)
 

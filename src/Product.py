@@ -1,8 +1,8 @@
 class Product:
-    name: str # название продукта
-    description: str # описание продукта
-    __price: float # цена продукта
-    quantity: int # колличество в наличии
+    name: str  # название продукта
+    description: str  # описание продукта
+    __price: float  # цена продукта
+    quantity: int  # колличество в наличии
 
     def __init__(self, name: str, description: str, price: float, quantity: int) -> None:
         self.name = name
@@ -10,22 +10,20 @@ class Product:
         self.__price = price
         self.quantity = quantity
 
+    def __str__(self) -> str:
+        return f"{self.name}, {self.price} руб. Остаток: {self.quantity} шт."
 
-    def __str__(self):
-        return f'{self.name}, {self.price} руб. Остаток: {self.quantity} шт.'
-
-
-    def __add__(self, other):
+    def __add__(self, other: "Product") -> float:
         return (self.__price * self.quantity) + (other.price * other.quantity)
 
     @classmethod
-    def new_product(cls, product_info: dict) -> 'Product':
+    def new_product(cls, product_info: dict) -> "Product":
         """Принимает параметры товара в словаре и возвращает созданный объект класса Product"""
         return cls(
-            name=product_info['name'],
-            description=product_info['description'],
-            price=product_info['price'],
-            quantity=product_info.get('quantity', 0)
+            name=product_info["name"],
+            description=product_info["description"],
+            price=product_info["price"],
+            quantity=product_info.get("quantity", 0),
         )
 
     @property
