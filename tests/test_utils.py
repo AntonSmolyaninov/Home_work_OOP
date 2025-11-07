@@ -1,6 +1,8 @@
 import json
 from unittest.mock import mock_open, patch
 
+import pytest
+
 from src.utils import load_categories_from_json
 
 mock_json_data = """
@@ -54,8 +56,8 @@ def test_load_categories_from_json(mock_file):
     assert len(result) == 2
     assert result[0].name == "Смартфоны"
     assert (
-            result[0].description
-            == "Смартфоны, как средство не только коммуникации, но и получение дополнительных функций для удобства жизни"
+        result[0].description
+        == "Смартфоны, как средство не только коммуникации, но и получение дополнительных функций для удобства жизни"
     )
 
     products_smartphones = result[0]._Category__products
@@ -66,13 +68,14 @@ def test_load_categories_from_json(mock_file):
 
     assert result[1].name == "Телевизоры"
     assert (
-            result[1].description
-            == "Современный телевизор, который позволяет наслаждаться просмотром, станет вашим другом и помощником"
+        result[1].description
+        == "Современный телевизор, который позволяет наслаждаться просмотром, станет вашим другом и помощником"
     )
 
     products_tv = result[1]._Category__products
     assert len(products_tv) == 1
     assert products_tv[0].name == '55" QLED 4K'
 
+
 if __name__ == "__main__":
-    pytest.main
+    pytest.main()

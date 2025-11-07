@@ -52,4 +52,4 @@ def test_iterator_with_empty_list():
 
 
 if __name__ == "__main__":
-    pytest.main
+    pytest.main()
