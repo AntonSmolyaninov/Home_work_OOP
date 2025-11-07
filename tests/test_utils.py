@@ -51,22 +51,28 @@ def test_load_categories_from_json(mock_file):
 
     result = load_categories_from_json(filepath)
 
-    # Проверяем, что результат содержит правильные данные
     assert len(result) == 2
     assert result[0].name == "Смартфоны"
     assert (
-        result[0].description
-        == "Смартфоны, как средство не только коммуникации, но и получение дополнительных функций для удобства жизни"
+            result[0].description
+            == "Смартфоны, как средство не только коммуникации, но и получение дополнительных функций для удобства жизни"
     )
-    assert len(result[0].products) == 3
-    assert result[0].products[0].name == "Samsung Galaxy C23 Ultra"
-    assert result[0].products[1].name == "Iphone 15"
-    assert result[0].products[2].name == "Xiaomi Redmi Note 11"
+
+    products_smartphones = result[0]._Category__products
+    assert len(products_smartphones) == 3
+    assert products_smartphones[0].name == "Samsung Galaxy C23 Ultra"
+    assert products_smartphones[1].name == "Iphone 15"
+    assert products_smartphones[2].name == "Xiaomi Redmi Note 11"
 
     assert result[1].name == "Телевизоры"
     assert (
-        result[1].description
-        == "Современный телевизор, который позволяет наслаждаться просмотром, станет вашим другом и помощником"
+            result[1].description
+            == "Современный телевизор, который позволяет наслаждаться просмотром, станет вашим другом и помощником"
     )
-    assert len(result[1].products) == 1
-    assert result[1].products[0].name == '55" QLED 4K'
+
+    products_tv = result[1]._Category__products
+    assert len(products_tv) == 1
+    assert products_tv[0].name == '55" QLED 4K'
+
+if __name__ == "__main__":
+    pytest.main

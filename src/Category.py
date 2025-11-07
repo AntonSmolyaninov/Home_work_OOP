@@ -21,26 +21,13 @@ class Category:
 
     def add_product(self, product: Product) -> None:
         """Добавляет продукт в список товаров"""
-        found = False
-
-        for existing_product in self.__products:
-            if existing_product.name == product.name:
-                # Если продукт с таким именем уже существует, обновляем quantity и price при необходимости
-                existing_product.quantity += product.quantity  # Увеличиваем количество на количество продукта
-                if product.price > existing_product.price:
-                    existing_product.price = product.price  # Устанавливаем более высокую цену
-                found = True
-                break
-
-        if not found:
-            self.__products.append(product)
-            Category.product_count += 1  # Увеличиваем глобальный счетчик
+        self.__products.append(product)
+        Category.product_count += 1  # Увеличиваем счетчик
 
     @property
     def products(self) -> str:
         """Геттер, который выводит список товаров в виде строк"""
         products_str = ""
         for product in self.__products:
-            products_str += f"{str(product)} \n"
-
+            products_str += f"{str(product)}\n"
         return products_str

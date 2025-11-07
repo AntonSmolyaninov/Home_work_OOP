@@ -3,41 +3,57 @@ import pytest
 from src.Product import Product
 
 
-def test_product_creation(product1):
-    assert product1.name == "Samsung Galaxy S23 Ultra"
-    assert product1.description == "256GB, Серый цвет, 200MP камера"
-    assert product1.price == 180000.0
-    assert product1.quantity == 5
+def test_product_init():
+    p = Product("One", "Test desc", 100.5, 2)
+    assert p.name == "One"
+    assert p.description == "Test desc"
+    assert p.price == 100.5
+    assert p.quantity == 2
 
 
-def test_create_product_with_default_quantity():
-    """Тестируем создание продукта с использованием значения по умолчанию для quantity"""
-    product_info = {"name": "iPhone 14", "description": "256GB, красный", "price": 80000.0}
-
-    product = Product.new_product(product_info)
-
-    assert product.name == "iPhone 14"
-    assert product.description == "256GB, красный"
-    assert product.price == 80000.0
-    assert product.quantity == 0
+def test_product_str():
+    p = Product("One", "Test desc", 123.45, 7)
+    s = str(p)
+    assert "One" in s
+    assert "123.45" in s
+    assert "Остаток: 7" in s
 
 
-def test_price_setter_and_getter():
-    """Тестируем геттер и сеттер для цены"""
-    product = Product("Nokia 3310", "Классический телефон", 5000.0, 10)
-
-    assert product.price == 5000.0
-
-    product.price = 6000.0
-    assert product.price == 6000.0
-
-    product.price = -1000.0
-    assert product.price == 6000.0
+def test_product_addition():
+    p1 = Product("One", "Test desc", 10.0, 2)
+    p2 = Product("Two", "Else", 5.0, 3)
+    total = p1 + p2
+    assert total == 35.0
 
 
-def test_price_setter_prints_message_on_invalid_price(capfd):
-    """Тестируем вывод сообщения при попытке установить неверную цену"""
-    product = Product("Xiaomi Mi 11", "Флагманский смартфон", 50000.0, 3)
-    product.price = -2000.0
-    captured = capfd.readouterr()
-    assert "Цена не должна быть нулевая или отрицательная." in captured.out
+def test_product_new_product_creates_new():
+    products = []
+    info = {"name": "Abc", "description": "Desc", "price": 77.0, "quantity": 3}
+    p = Product.new_product(info, products)
+    assert isinstance(p, Product)
+    assert p.name == "Abc"
+    assert p.quantity == 3
+
+
+def test_product_new_product_updates_existing():
+    products = [Product("Abc", "Desc", 77.0, 3)]
+    info = {"name": "Abc", "description": "Desc2", "price": 88.0, "quantity": 2}
+    existing = products[0]
+    p = Product.new_product(info, products)
+    assert p is existing
+    assert p.quantity == 5  # 3 + 2
+    assert p.price == 88.0
+
+
+def test_product_price_setter():
+    p = Product("Test", "Desc", 10.0, 1)
+    p.price = 99.99
+    assert p.price == 99.99
+    with pytest.raises(ValueError):
+        p.price = 0
+    with pytest.raises(ValueError):
+        p.price = -5
+
+
+if __name__ == "__main__":
+    pytest.main()

@@ -17,8 +17,21 @@ class Product:
         return (self.__price * self.quantity) + (other.price * other.quantity)
 
     @classmethod
-    def new_product(cls, product_info: dict) -> "Product":
-        """Принимает параметры товара в словаре и возвращает созданный объект класса Product"""
+    def new_product(cls, product_info: dict, products: list["Product"]) -> "Product":
+        """
+        Создаёт новый продукт, если такого ещё нет среди products.
+        Если товар с таким же именем уже есть — обновляет количество и (если нужно) цену.
+        """
+        for existing_product in products:
+            if existing_product.name == product_info["name"]:
+                # Обновить количество
+                existing_product.quantity += product_info.get("quantity", 0)
+                # В случае конфликта цен выбираем более высокую цену
+                if product_info["price"] > existing_product.price:
+                    existing_product.price = product_info["price"]
+                return existing_product  # Вернуть обновлённый
+
+        # Если не найден — создать новый объект
         return cls(
             name=product_info["name"],
             description=product_info["description"],
@@ -29,11 +42,11 @@ class Product:
     @property
     def price(self) -> float:
         """Геттер для атрибута цены."""
-        return self.__price  # Возвращаем приватный атрибут цены
+        return self.__price
 
     @price.setter
-    def price(self, value: float) -> None:  # Убедитесь, что сеттер не возвращает значение
+    def price(self, value: float) -> None:
         """Сеттер для атрибута цены с проверкой."""
         if value <= 0:
-            raise ValueError("Цена не должна быть нулевая или отрицательная.")  # Изменено на выброс исключения
+            raise ValueError("Цена не должна быть нулевая или отрицательная.")
         self.__price = value
