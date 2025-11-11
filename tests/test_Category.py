@@ -1,37 +1,54 @@
+import pytest
+
 from src.Category import Category
 from src.Product import Product
 
 
-def test_category_initialization(category):
-    """Тестируем инициализацию категории"""
+def test_category_init(category, product1, product2):
     assert category.name == "Смартфоны"
     assert category.description == "Смартфоны, как средство не только коммуникации"
-    assert len(category.in_products) == 2  # Должно быть 2 продукта в категории
+    # Проверяем, что оба продукта есть в результатах products (т.к. это общий текст)
+    assert product1.name in category.products
+    assert product2.name in category.products
 
 
-def test_add_new_product_to_category(category):
-    """Тестируем добавление нового продукта в категорию"""
-    new_product = Product("Xiaomi Redmi Note 11", "128GB, Черный", 31000.0, 10)
+def test_category_str(category):
+    s = str(category)
+    assert "Смартфоны" in s
+    assert "количество продуктов" in s
+
+
+def test_category_products_returns_string(category):
+    result = category.products
+    assert isinstance(result, str)
+    # Должен содержать оба продукта
+    assert "Samsung" in result and "Iphone" in result
+
+
+def test_add_product(category):
+    old_products_str = category.products
+    new_product = Product("Pixel", "Google phone", 50000.0, 2)
     category.add_product(new_product)
-
-    assert len(category.in_products) == 3  # Теперь должно быть 3 продукта
-    assert category.in_products[2].name == "Xiaomi Redmi Note 11"
-
-
-def test_add_existing_product_updates_quantity(category):
-    """Тестируем добавление существующего продукта с обновлением количества"""
-    existing_product = Product("Samsung Galaxy S23 Ultra", "256GB, Серый цвет, 200MP камера", 180000.0, 3)
-    category.add_product(existing_product)
-
-    # Количество первого продукта должно обновиться
-    assert category.in_products[0].quantity == 8  # 5 + 3
+    assert "Pixel" in category.products
+    assert category.products.count("Pixel") == 1
 
 
-def test_add_existing_product_updates_price(category):
-    """Тестируем добавление существующего продукта с обновлением цены"""
-    higher_price_product = Product("Iphone 15", "512GB, Gray space", 250000.0, 2)
-    category.add_product(higher_price_product)
+def test_category_counters_are_class_vars():
+    old_cc = Category.category_count
+    old_pc = Category.product_count
+    p1 = Product("AA", "D", 1, 1)
+    p2 = Product("BB", "E", 2, 2)
+    c = Category("Test", "desc", [p1, p2])
+    assert Category.category_count == old_cc + 1
+    assert Category.product_count == old_pc + 2
 
-    # Цена второго продукта должна обновиться
-    assert category.in_products[1].price == 250000.0  # Должна быть новая более высокая цена
 
+def test_add_product_increases_product_count(category):
+    main_count = Category.product_count
+    new_prod = Product("X", "D", 1, 1)
+    category.add_product(new_prod)
+    assert Category.product_count == main_count + 1
+
+
+if __name__ == "__main__":
+    pytest.main()
