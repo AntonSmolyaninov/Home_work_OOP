@@ -11,6 +11,8 @@
 6. `def price` - Геттер для атрибута цены.
 7. `price.setter` - Сеттер для атрибута цены с проверкой.
 8. product_iterator.py - модуль с вспомогательным классом который переберает товары одной категории.
+9. smartphone.py - выделенная категория смартфоны.
+10. law grass.py - выделенная категория трава гаронна.
 
 
 ## Установка:
@@ -51,3 +53,6 @@
 3. test_Product.py - тестируем класс Product
 4. test_utils.py - тестируем `load_categories_from_json`
 5. test_productiterator.py - тестируем класс ProductIterator.
+6. test_smartphone.py - тестирует класс наследник smartphone.
+7. test_lawgrass.py - тестирует класс наследник lawgrass py
+
