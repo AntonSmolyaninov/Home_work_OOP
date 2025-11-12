@@ -52,7 +52,7 @@
 2. test_Category.py - тестируем класс Category
 3. test_Product.py - тестируем класс Product
 4. test_utils.py - тестируем `load_categories_from_json`
-5. test_productiterator.py - тестируем класс ProductIterator.
+5. test_product_iterator.py - тестируем класс ProductIterator.
 6. test_smartphone.py - тестирует класс наследник smartphone.
-7. test_lawgrass.py - тестирует класс наследник lawgrass py
+7. test_lawngrass.py - тестирует класс наследник lawngrass py
 
