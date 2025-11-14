@@ -35,3 +35,4 @@ class Category:
         for product in self.__products:
             products_str += f"{str(product)}\n"
         return products_str
+
