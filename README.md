@@ -13,6 +13,8 @@
 8. product_iterator.py - модуль с вспомогательным классом который переберает товары одной категории.
 9. smartphone.py - выделенная категория смартфоны.
 10. law grass.py - выделенная категория трава гаронна.
+11. base_product.py - фбстрактный родительский модуль.
+12. print_mixin.py - выводит добавленый продукт в консоль.
 
 
 ## Установка:
@@ -55,4 +57,5 @@
 5. test_product_iterator.py - тестируем класс ProductIterator.
 6. test_smartphone.py - тестирует класс наследник smartphone.
 7. test_lawngrass.py - тестирует класс наследник lawngrass py
+8. test_print_mixin - тестирует print_mixin
 
