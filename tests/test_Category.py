@@ -50,5 +50,17 @@ def test_add_product_increases_product_count(category):
     assert Category.product_count == main_count + 1
 
 
+def test_category_middle_price_works():
+    p1 = Product("A", "desc", 10, 1)
+    p2 = Product("B", "desc", 20, 2)
+    c = Category("Phones", "desc", [p1, p2])
+    assert c.middle_price() == 15
+
+
+def test_category_no_products_middle_price():
+    c = Category("Empty", "desc", [])
+    assert c.middle_price() == 0
+
+
 if __name__ == "__main__":
     pytest.main()

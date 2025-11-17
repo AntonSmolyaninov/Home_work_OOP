@@ -3,22 +3,25 @@ from src.print_mixin import PrintMixin
 
 
 class Product(BaseProduct, PrintMixin):
+    """ Класс для представления продукта """
     name: str  # название продукта
     description: str  # описание продукта
     __price: float  # цена продукта
     quantity: int  # колличество в наличии
 
     def __init__(self, name: str, description: str, price: float, quantity: int) -> None:
+        """Инициализирует новый продукт."""
         self.name = name
         self.description = description
         self.__price = price
         if quantity <= 0:
-            raise ValueError('Товар с нулевым количеством не может быть добавлен.')
+            raise ValueError("Товар с нулевым количеством не может быть добавлен.")
         else:
             self.quantity = quantity
         super().__init__()
 
     def __str__(self) -> str:
+        """Формирует строковое представление продукта."""
         return f"{self.name}, {self.price} руб. Остаток: {self.quantity} шт."
 
     def __add__(self, other: "Product") -> float:
