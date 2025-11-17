@@ -36,3 +36,9 @@ class Category:
             products_str += f"{str(product)}\n"
         return products_str
 
+    def middle_price(self):
+        try:
+            return sum([product.price for product in self.__products]) / len(self.__products)
+        except ZeroDivisionError:
+            return  0
+
