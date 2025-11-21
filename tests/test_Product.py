@@ -55,5 +55,13 @@ def test_product_price_setter():
         p.price = -5
 
 
+def test_product_raises_valueerror_on_negative_quantity():
+    """
+    Проверка: ValueError поднимается, если quantity <= 0.
+    """
+    with pytest.raises(ValueError):
+        Product("iPhone", "Cool phone", 100000, -1)
+
+
 if __name__ == "__main__":
     pytest.main()

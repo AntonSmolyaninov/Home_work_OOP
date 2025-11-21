@@ -2,7 +2,7 @@ from src.product import Product
 
 
 class Category:
-
+    """Класс для представления категории товаров."""
     name: str  # название
     description: str  # описание
     __products: list[Product]  # приватный атрибут, список товаров
@@ -10,6 +10,7 @@ class Category:
     product_count: int = 0  # количество товаров
 
     def __init__(self, name: str, description: str, products: list[Product]):
+        """Инициализирует новый экземпляр категории."""
         self.name = name
         self.description = description
         self.__products = products if products else []
@@ -17,6 +18,8 @@ class Category:
         Category.product_count += len(self.__products)
 
     def __str__(self) -> str:
+        """Возвращает строковое представление категории, включающее
+        её название и количество всех продуктов."""
         total_quantity = sum(product.quantity for product in self.__products)
         return f"{self.name}, количество продуктов: {total_quantity} шт."
 
@@ -35,3 +38,10 @@ class Category:
         for product in self.__products:
             products_str += f"{str(product)}\n"
         return products_str
+
+    def middle_price(self):
+        """подсчитывает средний ценник всех товаров."""
+        try:
+            return sum([product.price for product in self.__products]) / len(self.__products)
+        except ZeroDivisionError:
+            return 0
